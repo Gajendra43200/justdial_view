@@ -1,0 +1,10 @@
+<%= form_with(model: [@service, @review], url: service_reviews_path(@service)) do |f| %>
+<%= f.hidden_field :service_id, value: @service.id %><br>
+
+<%= f.label :rating %>
+<%= f.number_field :rating, in: 1..5 %><br>
+<%= f.label :content %>
+<%= f.text_field :content %><br>
+<%= f.submit "create review" %>
+<%end %>
+

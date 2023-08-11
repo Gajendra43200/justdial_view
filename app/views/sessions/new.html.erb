@@ -1,0 +1,12 @@
+<h1> Login</h1>
+<%= form_with url:login_path do |form| %>
+ <%#= form.select :user_type, [["Admin", "Admin"], ["Customer", "Customer"]] %>
+
+  <%= form.label :email %>
+  <%= form.text_field :email %><br>
+
+  <%= form.label :password %>
+  <%= form.text_field :password %><br>
+   <%= form.submit 'Login' %>
+
+<% end %>

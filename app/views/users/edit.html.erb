@@ -1,0 +1,28 @@
+<%= form_with model: @user do |form| %>
+ <%= form.select :user_type, [["Admin", "Admin"], ["Customer", "Customer"]] %>
+
+  <%= form.label :name %>
+  <%= form.text_field :name %><br>
+
+  <%= form.label :email %>
+  <%= form.text_field :email %><br>
+
+   <%= form.label :address %>
+  <%= form.text_field :address %><br>
+
+   <%= form.label :location %>
+  <%= form.text_field :location %><br>
+
+   <%= form.label :city %>
+  <%= form.text_field :city %><br>
+
+   <%= form.label :state %>
+  <%= form.text_field :state %><br>
+
+   <%= form.label :password %>
+  <%= form.text_field :password_digest %><br>
+
+  <%= form.submit %>
+
+<% end %>
+

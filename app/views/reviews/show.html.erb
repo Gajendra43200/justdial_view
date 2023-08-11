@@ -1,0 +1,7 @@
+<p>Review_id : <%= @review.id %></p>
+<p>User_id : <%= @review.user_id%></p>
+<p>Service_id :<%= @review.service_id %></p>
+<p>Rating : <%= @review.rating %></p>
+<p>Content : <%= @review.content %></p>
+<%= link_to "New review", new_review_path %>
+<%= link_to "All Review", reviews_path %>

@@ -1,0 +1,17 @@
+<%= form_with model: @service do |form| %>
+ <%= form.select :status, [["Open", "Open"], ["Close", "Close"]] %>
+  <%= form.label :service_name %>
+  <%= form.text_field :service_name %><br>
+
+  <%= form.label :location %>
+  <%= form.text_field :location %><br>
+
+   <%= form.label :city %>
+  <%= form.text_field :city %><br>
+
+  <%= form.submit 'create service' %>
+  <%= link_to "All Service", services_path %>
+
+
+<% end %>
+

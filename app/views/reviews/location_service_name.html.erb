@@ -1,0 +1,11 @@
+<h1> Search</h1>
+<%= form_with url:search_path, method: :get do |form| %>
+
+  <%= form.label :service_name %>
+  <%= form.text_field :service_name %><br>
+
+  <%= form.label :city %>
+  <%= form.text_field :city %><br>
+   <%= form.submit 'Search' %>
+
+<% end %>

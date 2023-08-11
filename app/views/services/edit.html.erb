@@ -1,0 +1,21 @@
+<%= form_with model: @service do |form| %>
+ <%= form.select :status, [["Open", "Open"], ["Close", "Close"]] %>
+  <%= form.label :service_name %>
+  <%= form.text_field :service_name %><br>
+
+  <%= form.label :location %>
+  <%= form.text_field :location %><br>
+
+   <%= form.label :city %>
+  <%= form.text_field :city %><br>
+
+   <%= form.label :user_id %>
+  <%= form.number_field :user_id %><br>
+
+   <%= form.label :avg_rating %>
+  <%= form.number_field :avg_rating %><br>
+
+  <%= form.submit %>
+
+<% end %>
+

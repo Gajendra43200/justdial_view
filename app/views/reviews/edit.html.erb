@@ -1,0 +1,13 @@
+<%= form_with model: @review do |form| %>
+  <%= form.label :serviced_id %>
+  <%= form.number_field :service_id %><br>
+
+   <%= form.label :rating %>
+  <%= form.number_field :rating %><br>
+
+   <%= form.label :content%>
+  <%= form.text_field :content %><br>
+
+  <%= form.submit 'edit review' %>
+
+<% end %>
