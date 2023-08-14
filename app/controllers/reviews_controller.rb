@@ -10,7 +10,7 @@ def index
     else
       @services = Service.all
     end
-    # @review = Review.new
+    @review = Review.new
   end
 
    def show
@@ -18,7 +18,6 @@ def index
   end
 
   def create
-    # review = @current_user.reviews.new(review_params)
     @service = Service.find(params[:review][:service_id])
     @review = @service.reviews.new(review_params)
     @review.user = current_user
@@ -53,20 +52,23 @@ def index
   end
 
   def location_service_name
+    # byebug
     if  params[:service_name].present?
-      services = Service.where("service_name like ?" ,"%#{params[:service_name]}%")
-      redirect_to reviews_path
+      @services = Service.where("service_name like ?" ,"%#{params[:service_name]}%")
+      # redirect_to reviews_path
+      render 'service_name_print'
     elsif params[:city].present?
-      services = Service.where("city like ?" ,"%#{params[:city]}%")
-       redirect_to services_path if services.present?
+      @services = Service.where("city like ?" ,"%#{params[:city]}%")
+       if @services.present?
+        render 'reviews/service_name_print'
+      end
     elsif current_user.present?
-      service = Service.where(location: @current_user.location)
-      if service.present?
-        redirect_to services_path
+      @services = Service.where(location: @current_user.location)
+      if @services.present?
+        render 'service_name_print'
       else
         services = Service.all
         redirect_to services_path
-
       end
     end
   end

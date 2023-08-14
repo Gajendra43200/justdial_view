@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   #   get 'signin', on: :collection
   #    post 'login', on: :collection
   #  end
+
+  root 'users#index'
   resources :services do
     resources :reviews, only: [:new, :create]
   end

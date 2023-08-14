@@ -31,19 +31,22 @@ class ServicesController < ApplicationController
 
   def update
    @service = @current_user.services.find_by_id(params[:id])
-    if @service.update(service_params)
+    if @service.present?
+      @service.update(service_params)
       redirect_to services_path
     else
-      render :edit
+      # render :edit
+      redirect_to service_path, alert: "you con't update another Admins service."
     end
   end
 
   def destroy
     @service = @current_user.services.find_by_id(params[:id])
-    if@service.delete
+    if @service.present?
+      @service.delete
       redirect_to services_path
     else
-     render :show
+      redirect_to service_path, alert: "you con't delete another Admin service."
     end
   end
 
