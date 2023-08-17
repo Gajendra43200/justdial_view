@@ -41,12 +41,42 @@
 .fl-table tr:nth-child(even) {
     background: #F8F8F8;
 }
-.footer{
+/*.footer{
   display: flex;
   align-items: center;
   justify-content: center;
   margin: -60px;
   background-color: white;
+}*/
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: whitesmoke;
+  color: white;
+  text-align: center;
+  padding-top: 22px;
+  height: 28px;
+  margin-bottom: 17px;
+}
+
+.navbar-buttons {
+  display: flex;
+  gap: 10px;
+}
+.navbar-button {
+  background-color: #2ECC71;
+  color: #FFFFFF;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.navbar-button:hover {
+  background-color: #27AE60;
 }
 
 h2{
@@ -63,9 +93,9 @@ h2{
 <h2>All Users</h2>
 <div class="table-wrapper">
     <table class="fl-table">
-        <thead>
-        <tr>
-            <th>User_Type</th>
+    <thead>
+    <tr>
+      <th>User_Type</th>
       <th>name </th>
       <th>email </th>
       <th>city</th>
@@ -74,11 +104,11 @@ h2{
       <th>address</th>
       <th>password</th>
       <th colspan="3"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @users.each do |user| %>
-      <tr>
+    </tr>
+    </thead>
+    <tbody>
+    <% @users.each do |user| %>
+    <tr>
         <td><%= user.user_type %></td>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
@@ -90,15 +120,14 @@ h2{
         <td><%= link_to "Show", user, class: 'user'%></td>
         <td><%= link_to "Edit", edit_user_path(user)%></td>
         <td><%= button_to "Destroy", user, method: :delete%></td>
-      </tr>
-       <% end %>
+    </tr>
+    <% end %>
         <tbody>
     </table>
 </div>
 <div class="footer">
-    | |<%= link_to "New Service", new_service_path %>| |
-    <%= link_to "login  ", login_path %>| |
-    <%= button_to "logout", logout_path, method: :delete%>| |
+    <%= link_to "Create User", new_user_path, class:"navbar-button"%>
+    <%= link_to "login  ", login_path,class:"navbar-button" %>
 </div>
 
 

@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-before_action :require_customer, only:[:new, :create, :show, :index, :edit, :update, :destroy]
+before_action :require_customer
 def index
     @reviews= Review.all
   end
@@ -22,7 +22,7 @@ def index
     @review = @service.reviews.new(review_params)
     @review.user = current_user
     if @review.save
-     redirect_to reviews_path
+     redirect_to reviews_path,notice: "Review Creted successfully."
     else
      render :new
     end
@@ -32,17 +32,18 @@ def index
     @review = Review.find(params[:id])
   end
   def update
-    @review = @current_user.reviews.find(params[:id])
-    if @review.nil?
-      redirect_to reviews_path
-    else
+    @review = current_user.reviews.find_by_id(params[:id])
+
+    if @review.present?
       @review.update(review_params)
-      redirect_to reviews_path
+      redirect_to reviews_path,notice: "Review updated successfully."
+    else
+      redirect_to reviews_path, notice: "you con't update another users's review."
     end
   end
 
   def destroy
-    @review = @current_user.reviews.find_by_id(params[:id])
+    @review = current_user.reviews.find_by_id(params[:id])
     if @review.present?
       @review.delete
       redirect_to reviews_path, notice: "Review deleted successfully."
@@ -52,18 +53,22 @@ def index
   end
 
   def location_service_name
-    # byebug
     if  params[:service_name].present?
       @services = Service.where("service_name like ?" ,"%#{params[:service_name]}%")
-      # redirect_to reviews_path
+      if @services.present?
       render 'service_name_print'
+    else
+      redirect_to reviews_path, notice: "Service Not Exits "
+    end
     elsif params[:city].present?
       @services = Service.where("city like ?" ,"%#{params[:city]}%")
-       if @services.present?
+      if @services.present?
         render 'reviews/service_name_print'
+      else
+        redirect_to reviews_path ,notice: "Service Not Exits For This City"
       end
     elsif current_user.present?
-      @services = Service.where(location: @current_user.location)
+      @services = Service.where(location: current_user.location)
       if @services.present?
         render 'service_name_print'
       else
@@ -80,13 +85,7 @@ def index
     end
   end
   def review_params
-    # params.require(:review).permit(:content, :rating, :service_id)
     params.require(:review).permit(:content, :rating, :service_id)
 
   end
 end
-
-
-# <td><%= link_to "Show", review %></td>
-#         <td><%= link_to "Edit", edit_review_path(review)%></td>
-#         <td><%= button_to "Destroy", review, method: :delete%></td>

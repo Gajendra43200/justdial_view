@@ -1,9 +1,5 @@
 class ServicesController < ApplicationController
-   # before_action :check_admin, except: [:index]
-  # before_action :check_customer, only:[:index]
-  # before_action :require_login
-  # before_action :require_login, only:[:new, :create, :show, :index, :edit, :update, :destroy]
-  before_action :require_admin, only:[:new, :create, :edit, :update, :destroy]
+  before_action :require_admin
 
   def index
     @services = Service.all
@@ -30,7 +26,7 @@ class ServicesController < ApplicationController
   end
 
   def update
-   @service = @current_user.services.find_by_id(params[:id])
+   @service = current_user.services.find_by_id(params[:id])
     if @service.present?
       @service.update(service_params)
       redirect_to services_path
@@ -41,7 +37,7 @@ class ServicesController < ApplicationController
   end
 
   def destroy
-    @service = @current_user.services.find_by_id(params[:id])
+    @service = current_user.services.find_by_id(params[:id])
     if @service.present?
       @service.delete
       redirect_to services_path
